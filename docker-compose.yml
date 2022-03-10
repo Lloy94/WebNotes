@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+  webnotes:
+    image: ${DOCKER_REGISTRY-}webnotes
+    environment:
+        DB_CONNECTION_STRING: "host=postgres;port=5432;database=webnotesdb;username=webnotesuser;password=webnotespassword"
+    build:
+      context: .
+      dockerfile: WebNotes/Dockerfile
+   
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_DB: "webnotesdb"
+      POSTGRES_USER: "webnotesuser"
+      POSTGRES_PASSWORD: "webnotespassword"
+    ports:
+      - "5432:5432"
+   
