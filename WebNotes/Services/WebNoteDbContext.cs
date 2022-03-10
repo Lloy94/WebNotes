@@ -11,7 +11,8 @@ namespace WebNotes.Services
     public class WebNoteDbContext : DbContext
     { 
     
-        public WebNoteDbContext(DbContextOptions<WebNoteDbContext> options) : base(options) { }
+        public WebNoteDbContext(DbContextOptions<WebNoteDbContext> options) : base(options) { Database.EnsureCreated(); }
+ 
         public DbSet<User> Users { get; set; }
         public DbSet<Note> Notes { get; set; }
 

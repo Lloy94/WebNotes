@@ -8,6 +8,6 @@ namespace WebNotes.Models.Identity
 {
     public class Role : IdentityRole
     {
-        public const string Users = "users";
+        public const string Users = "Users";
     }
 }
