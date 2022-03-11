@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebNotes.Models.Identity;
+using WebNotes.Services;
 using WebNotes.ViewModels;
 
 namespace WebNotes.Controllers
@@ -16,15 +17,18 @@ namespace WebNotes.Controllers
         private readonly UserManager<User> _UserManager;
         private readonly SignInManager<User> _SignInManager;
         private readonly RoleManager<Role> _RoleManager;
+        private readonly WebNoteDbContext _db;
 
         public AccountController(
             UserManager<User> UserManager,
             SignInManager<User> SignInManager,
-            RoleManager<Role> RoleManager)
+            RoleManager<Role> RoleManager,
+            WebNoteDbContext Db)
         {
             _UserManager = UserManager;
             _SignInManager = SignInManager;
             _RoleManager = RoleManager;
+            _db = Db;
         }
 
         #region Register
