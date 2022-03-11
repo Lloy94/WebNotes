@@ -46,6 +46,7 @@ namespace WebNotes
 #endif
                 opt.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVWXYZ1234567890@.";
                 opt.User.RequireUniqueEmail = false;
+         
 
                 opt.Lockout.AllowedForNewUsers = false;
                 opt.Lockout.MaxFailedAccessAttempts = 10;

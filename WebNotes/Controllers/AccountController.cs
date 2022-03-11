@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using WebNotes.Models.Identity;
@@ -54,8 +55,14 @@ namespace WebNotes.Controllers
                    UserName = Model.UserName
                 };
 
+            var user1 = _db.Users.Where(o => o.UserName == Model.UserName).FirstOrDefault();
+            if (_db.Users.Contains(user1))
+            {
+                ModelState.AddModelError("", "Пользователь с таким именем уже существует");
+                return View(Model);
+            }
 
-                var register_result = await _UserManager.CreateAsync(user, Model.Password);
+            var register_result = await _UserManager.CreateAsync(user, Model.Password);
                 if (register_result.Succeeded)
                 {
 
@@ -66,7 +73,6 @@ namespace WebNotes.Controllers
                     return RedirectToAction("Index", "Home");
                 }
 
-               
             
 
             return View(Model);
@@ -86,6 +92,13 @@ namespace WebNotes.Controllers
                 Model.RememberMe,
                 false);
 
+            if (login_result.Succeeded)
+            
+                return RedirectToAction("Index", "Home");
+            else
+            {
+                ModelState.AddModelError("", "Неправильный логин и (или) пароль");
+            }
 
             return View(Model);
         }

@@ -26,9 +26,13 @@ namespace WebNotes.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(NoteViewModel Model)
         {
-            var user = await _UserManager.GetUserAsync(User);
-            await _NoteService.CreateNote(user.UserName, Model);
-            return RedirectToAction("Index", "Home");
+            if (ModelState.IsValid)
+            {
+                var user = await _UserManager.GetUserAsync(User);
+                await _NoteService.CreateNote(user.UserName, Model);
+                return RedirectToAction("Index", "Home");
+            }
+            return View(Model);
         }
     }
 }
