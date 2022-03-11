@@ -11,12 +11,12 @@
     </thead>
     <tbody>
         @{ var i = 1; }
-        @foreach (var order in Model)
+        @foreach (var note in Model)
         {
             <tr>
                 <td>@(i++)</td>
-                <td>@order.Date.ToString("dd/MM/yy HH:mm")</td>
-                <td>@order.NoteInfo</td>
+                <td>@note.Date.ToString("dd/MM/yy HH:mm")</td>
+                <td>@note.NoteInfo</td>
             </tr>
 }
     </tbody>
