@@ -12,5 +12,7 @@ namespace WebNotes.ViewModels
         [Display(Name = "Содержание записки")]
         public string NoteInfo { get; set; }
 
+        public DateTimeOffset Date { get; set; } = DateTimeOffset.UtcNow;
+
     }
 }

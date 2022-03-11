@@ -24,9 +24,10 @@ namespace WebNotes.Services.InSql
 
         public async Task<IEnumerable<Note>> GetUserNotes(string UserName)
         {
-            var notes= await _db.Notes
+            var notes = await _db.Notes
+               .Include(o =>o.User)
                .Where(o => o.User.UserName == UserName)
-               .ToArrayAsync()
+               .ToListAsync()
                .ConfigureAwait(false);
             return notes;
         }
