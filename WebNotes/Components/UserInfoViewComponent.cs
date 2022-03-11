@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace WebNotes.Components
 {
-    public class UserViewComponent : ViewComponent
+    public class UserInfoViewComponent : ViewComponent
     {
         public IViewComponentResult Invoke() => User.Identity?.IsAuthenticated == true
-           ? View("User")
+           ? View("UserInfo")
            : View();
     }
 }
