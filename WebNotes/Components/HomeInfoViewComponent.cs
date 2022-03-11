@@ -14,8 +14,8 @@ namespace WebNotes.Components
         public HomeInfoViewComponent([FromServices] InSqlNoteData NoteService) { _NoteService = NoteService; }
         public IViewComponentResult Invoke()
         {
-            var orders = _NoteService.GetUserNotes(User.Identity!.Name).Result.ToList();
-            int count = orders.Count();
+            var notes= _NoteService.GetUserNotes(User.Identity!.Name).Result.ToList();
+            int count = notes.Count();
             if (User.Identity?.IsAuthenticated == true)
                 return View("HomeInfo",count);
             else return View();

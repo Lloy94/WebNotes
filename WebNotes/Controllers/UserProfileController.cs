@@ -16,12 +16,12 @@ namespace WebNotes.Controllers
 
         public async Task<IActionResult> Index([FromServices] InSqlNoteData NoteService)
         {
-            var orders = await NoteService.GetUserNotes(User.Identity!.Name);
+            var notes = await NoteService.GetUserNotes(User.Identity!.Name);
 
-            return View(orders.Select(order => new NoteViewModel
+            return View(notes.Select(note => new NoteViewModel
             {
-                NoteInfo = order.NoteInfo,
-                Date=order.Date
+                NoteInfo = note.NoteInfo,
+                Date=note.Date
 
             })); ;
         }
