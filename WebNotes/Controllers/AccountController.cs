@@ -46,8 +46,8 @@ namespace WebNotes.Controllers
             }
 
             var user = new User
-                {
-                    UserName = Model.UserName,
+                {                
+                   UserName = Model.UserName
                 };
 
 

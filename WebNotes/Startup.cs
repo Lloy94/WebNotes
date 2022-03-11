@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebNotes.Models.Identity;
 using WebNotes.Services;
+using WebNotes.Services.InSql;
 
 namespace WebNotes
 {
@@ -43,9 +44,8 @@ namespace WebNotes
                 opt.Password.RequiredLength = 3;
                 opt.Password.RequiredUniqueChars = 3;
 #endif
-
+                opt.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVWXYZ1234567890@.";
                 opt.User.RequireUniqueEmail = false;
-                opt.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVWXYZ1234567890";
 
                 opt.Lockout.AllowedForNewUsers = false;
                 opt.Lockout.MaxFailedAccessAttempts = 10;
@@ -65,8 +65,8 @@ namespace WebNotes
 
                 opt.SlidingExpiration = true;
             });
-         
 
+            services.AddTransient<InSqlNoteData>();
             services.AddControllersWithViews();
         }
 
