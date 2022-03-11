@@ -1,0 +1,23 @@
+﻿@{ ViewBag.Title = "Профиль пользователя";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>№ заметки</th>
+            <th>Дата создания</th>
+            <th>Текст заметки</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ var i = 1; }
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@(i++)</td>
+                <td>@order.Date.ToString("dd/MM/yy HH:mm")</td>
+                <td>@order.NoteInfo</td>
+            </tr>
+}
+    </tbody>
+</table> 
