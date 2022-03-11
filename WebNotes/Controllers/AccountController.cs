@@ -15,13 +15,16 @@ namespace WebNotes.Controllers
     {
         private readonly UserManager<User> _UserManager;
         private readonly SignInManager<User> _SignInManager;
+        private readonly RoleManager<Role> _RoleManager;
 
         public AccountController(
             UserManager<User> UserManager,
-            SignInManager<User> SignInManager)
+            SignInManager<User> SignInManager,
+            RoleManager<Role> RoleManager)
         {
             _UserManager = UserManager;
             _SignInManager = SignInManager;
+            _RoleManager = RoleManager;
         }
 
         #region Register
@@ -33,8 +36,16 @@ namespace WebNotes.Controllers
         {
             if (!ModelState.IsValid) return View(Model);
 
-           
-                var user = new User
+            try
+            {
+                await InitializeIdentityAsync();
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+
+            var user = new User
                 {
                     UserName = Model.UserName,
                 };
@@ -90,6 +101,23 @@ namespace WebNotes.Controllers
         public IActionResult AccessDenied()
         {
             return View();
+        }
+        private async Task InitializeIdentityAsync()
+        {
+
+            async Task CheckRole(string RoleName)
+            {
+                if (await _RoleManager.RoleExistsAsync(RoleName))
+                    return;
+                else
+                {
+                    await _RoleManager.CreateAsync(new Role { Name = RoleName });
+                }
+            }
+
+            await CheckRole(Role.Users);
+
+
         }
     }
 }

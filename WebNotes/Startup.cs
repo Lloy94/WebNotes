@@ -52,6 +52,21 @@ namespace WebNotes
                 opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
             });
 
+            services.ConfigureApplicationCookie(opt =>
+            {
+                opt.Cookie.Name = "WebNotes";
+                opt.Cookie.HttpOnly = true;
+
+                opt.ExpireTimeSpan = TimeSpan.FromDays(10);
+
+                opt.LoginPath = "/Account/Login";
+                opt.LogoutPath = "/Account/Logout";
+                opt.AccessDeniedPath = "/Account/AccessDenied";
+
+                opt.SlidingExpiration = true;
+            });
+         
+
             services.AddControllersWithViews();
         }
 
